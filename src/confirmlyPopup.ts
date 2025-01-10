@@ -1,4 +1,3 @@
-
 import Popper from '@popperjs/core';
 
 interface PopperOptions {
@@ -119,23 +118,27 @@ export class confirmPopup {
       this.popperInstance.destroy();
     }
 
-    this.popperInstance = Popper.createPopper(targetElement, this.popperElement, {
-      placement: this.defaultPlacement,
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 8],
+    this.popperInstance = Popper.createPopper(
+      targetElement,
+      this.popperElement,
+      {
+        placement: this.defaultPlacement,
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 8],
+            },
           },
-        },
-        {
-          name: 'arrow',
-          options: {
-            element: '[data-popper-arrow]',
+          {
+            name: 'arrow',
+            options: {
+              element: '[data-popper-arrow]',
+            },
           },
-        },
-      ],
-    });
+        ],
+      },
+    );
   }
 
   private hidePopper() {
