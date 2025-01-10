@@ -1,22 +1,22 @@
-// src/ConfirmationPopper.ts
-import { createPopper, Placement } from '@popperjs/core';
+
+import Popper from '@popperjs/core';
 
 interface PopperOptions {
   template?: string;
   buttonClasses?: { confirm: string; cancel: string };
   buttonContents?: { confirm: string; cancel: string };
-  defaultPlacement?: Placement;
+  defaultPlacement?: Popper.Placement;
   targetElement: HTMLElement;
   onConfirm?: () => void;
   onCancel?: () => void;
 }
 
-export class ConfirmationPopper {
+export class confirmPopup {
   private popperInstance: any = null;
   private template: string;
   private buttonClasses: { confirm: string; cancel: string };
   private buttonContents: { confirm: string; cancel: string };
-  private defaultPlacement: Placement;
+  private defaultPlacement: Popper.Placement;
   private popperElement: HTMLElement;
   private onConfirmCallback?: () => void;
   private onCancelCallback?: () => void;
@@ -49,8 +49,8 @@ export class ConfirmationPopper {
       <div class="confirmation-content">
         <p>Are you sure?</p>
         <div class="arrow" data-popper-arrow></div>
-        <button class="{{confirmClass}}">{{confirmContent}}</button>
-        <button class="{{cancelClass}}">{{cancelContent}}</button>
+        <button class="{{confirmClass}}" data-button="confirm">{{confirmContent}}</button>
+        <button class="{{cancelClass}}" data-button="cancel">{{cancelContent}}</button>
       </div>
     `;
   }
@@ -69,14 +69,18 @@ export class ConfirmationPopper {
 
     popperDiv.innerHTML = template;
 
+    const confirmClass = this.buttonClasses.confirm.replace(' ', '.');
+
     popperDiv
-      .querySelector(`.${this.buttonClasses.confirm}`)
+      .querySelector(`[data-button="confirm"]`)
       ?.addEventListener('click', () => {
         this.handleConfirm();
       });
 
+    const cancelClass = this.buttonClasses.cancel.replace(' ', '.');
+
     popperDiv
-      .querySelector(`.${this.buttonClasses.cancel}`)
+      .querySelector(`[data-button="cancel"]`)
       ?.addEventListener('click', () => {
         this.handleCancel();
       });
@@ -115,7 +119,7 @@ export class ConfirmationPopper {
       this.popperInstance.destroy();
     }
 
-    this.popperInstance = createPopper(targetElement, this.popperElement, {
+    this.popperInstance = Popper.createPopper(targetElement, this.popperElement, {
       placement: this.defaultPlacement,
       modifiers: [
         {
