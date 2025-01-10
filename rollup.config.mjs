@@ -1,5 +1,5 @@
 import typescript from 'rollup-plugin-typescript2';
-import { terser } from '@rollup/plugin-terser';
+import terser from '@rollup/plugin-terser';
 
 const isProduction = process.env.NODE_ENV === 'production';
 

@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
     "main": "dist/confirmly-popup.cdn.js",
+    
     "scripts": {
         "build": "rollup -c"
     },
