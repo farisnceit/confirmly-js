@@ -1,6 +1,5 @@
 // src/ConfirmationPopper.ts
-import { createPopper,Placement } from '@popperjs/core';
-
+import { createPopper, Placement } from '@popperjs/core';
 
 interface PopperOptions {
   template?: string;
@@ -32,7 +31,10 @@ export class ConfirmationPopper {
     onCancel,
   }: PopperOptions) {
     this.template = template || this.defaultTemplate();
-    this.buttonClasses = buttonClasses || { confirm: 'confirm-btn', cancel: 'cancel-btn' };
+    this.buttonClasses = buttonClasses || {
+      confirm: 'confirm-btn',
+      cancel: 'cancel-btn',
+    };
     this.buttonContents = buttonContents || { confirm: 'Yes', cancel: 'No' };
     this.defaultPlacement = defaultPlacement || 'top';
 
@@ -67,13 +69,17 @@ export class ConfirmationPopper {
 
     popperDiv.innerHTML = template;
 
-    popperDiv.querySelector(`.${this.buttonClasses.confirm}`)?.addEventListener('click', () => {
-      this.handleConfirm();
-    });
+    popperDiv
+      .querySelector(`.${this.buttonClasses.confirm}`)
+      ?.addEventListener('click', () => {
+        this.handleConfirm();
+      });
 
-    popperDiv.querySelector(`.${this.buttonClasses.cancel}`)?.addEventListener('click', () => {
-      this.handleCancel();
-    });
+    popperDiv
+      .querySelector(`.${this.buttonClasses.cancel}`)
+      ?.addEventListener('click', () => {
+        this.handleCancel();
+      });
 
     return popperDiv;
   }
@@ -81,7 +87,7 @@ export class ConfirmationPopper {
   public attach(
     element: HTMLElement,
     onConfirm?: () => void,
-    onCancel?: () => void
+    onCancel?: () => void,
   ): void {
     element.addEventListener('click', (event) => {
       event.stopPropagation();
@@ -95,7 +101,11 @@ export class ConfirmationPopper {
     });
   }
 
-  private showPopper(targetElement: HTMLElement, onConfirm?: () => void, onCancel?: () => void) {
+  private showPopper(
+    targetElement: HTMLElement,
+    onConfirm?: () => void,
+    onCancel?: () => void,
+  ) {
     this.onConfirmCallback = onConfirm;
     this.onCancelCallback = onCancel;
 

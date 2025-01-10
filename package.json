@@ -1,19 +1,40 @@
 {
-    "name": "confirmly-popup",
-    "version": "1.0.0",
-    "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
-    "main": "dist/confirmly-popup.cdn.js",
-    
-    "scripts": {
-        "build": "rollup -c"
-    },
-    "devDependencies": {
-        "@rollup/plugin-terser": "^0.4.4",
-        "rollup": "^4.30.1",
-        "rollup-plugin-typescript2": "^0.36.0",
-        "typescript": "^5.7.3"
-    },
-    "dependencies": {
-        "@popperjs/core": "^2.11.8"
+  "name": "confirmly-popup",
+  "version": "1.0.0",
+  "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
+  "main": "dist/confirmly-popup.cdn.js",
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint --fix 'src/**/*.{ts,js}'",
+    "format": "prettier --write 'src/**/*.{ts,js,css,html}'",
+    "lint:check": "eslint 'src/**/*.{ts,js}'",
+    "format:check": "prettier --check 'src/**/*.{ts,js,css,html}'"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "prettier": "^3.4.2",
+    "rollup": "^4.30.1",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.7.3",
+    "@popperjs/core": "^2.11.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
 }
