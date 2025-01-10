@@ -1,0 +1,18 @@
+{
+    "name": "confirmly-popup",
+    "version": "1.0.0",
+    "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
+    "main": "dist/confirmly-popup.cdn.js",
+    "scripts": {
+        "build": "rollup -c"
+    },
+    "devDependencies": {
+        "@rollup/plugin-terser": "^0.4.4",
+        "rollup": "^4.30.1",
+        "rollup-plugin-typescript2": "^0.36.0",
+        "typescript": "^5.7.3"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.8"
+    }
+}
