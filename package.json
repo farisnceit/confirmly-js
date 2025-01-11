@@ -5,6 +5,7 @@
   "main": "dist/confirmly-popup.cdn.js",
   "scripts": {
     "build": "rollup -c",
+    "watch": "rollup -c -w",
     "lint": "eslint --fix 'src/**/*.{ts,js}'",
     "format": "prettier --write 'src/**/*.{ts,js,css,html}'",
     "lint:check": "eslint 'src/**/*.{ts,js}'",

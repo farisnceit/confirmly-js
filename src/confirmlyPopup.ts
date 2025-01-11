@@ -1,14 +1,6 @@
 import Popper from '@popperjs/core';
 
-interface PopperOptions {
-  template?: string;
-  buttonClasses?: { confirm: string; cancel: string };
-  buttonContents?: { confirm: string; cancel: string };
-  defaultPlacement?: Popper.Placement;
-  targetElement: HTMLElement;
-  onConfirm?: () => void;
-  onCancel?: () => void;
-}
+import { PopperOptions } from './constants'
 
 export class confirmPopup {
   private popperInstance: any = null;
@@ -19,6 +11,7 @@ export class confirmPopup {
   private popperElement: HTMLElement;
   private onConfirmCallback?: () => void;
   private onCancelCallback?: () => void;
+  private showError: boolean;
 
   constructor({
     template,
@@ -28,6 +21,7 @@ export class confirmPopup {
     targetElement,
     onConfirm,
     onCancel,
+    showError = true,
   }: PopperOptions) {
     this.template = template || this.defaultTemplate();
     this.buttonClasses = buttonClasses || {
@@ -36,6 +30,7 @@ export class confirmPopup {
     };
     this.buttonContents = buttonContents || { confirm: 'Yes', cancel: 'No' };
     this.defaultPlacement = defaultPlacement || 'top';
+    this.showError = showError;
 
     this.popperElement = this.createPopperElement();
     document.body.appendChild(this.popperElement);
@@ -68,23 +63,27 @@ export class confirmPopup {
 
     popperDiv.innerHTML = template;
 
-    const confirmClass = this.buttonClasses.confirm.replace(' ', '.');
-
-    popperDiv
-      .querySelector(`[data-button="confirm"]`)
-      ?.addEventListener('click', () => {
-        this.handleConfirm();
-      });
-
-    const cancelClass = this.buttonClasses.cancel.replace(' ', '.');
-
-    popperDiv
-      .querySelector(`[data-button="cancel"]`)
-      ?.addEventListener('click', () => {
-        this.handleCancel();
-      });
+    // Ensure event listeners are added dynamically after template insertion
+    this.attachButtonListeners(popperDiv);
 
     return popperDiv;
+  }
+
+  private attachButtonListeners(popperDiv: HTMLElement): void {
+    const confirmButton = popperDiv.querySelector('[data-button="confirm"]');
+    const cancelButton = popperDiv.querySelector('[data-button="cancel"]');
+
+    if (confirmButton) {
+      confirmButton.addEventListener('click', () => {
+        this.handleConfirm();
+      });
+    }
+
+    if (cancelButton) {
+      cancelButton.addEventListener('click', () => {
+        this.handleCancel();
+      });
+    }
   }
 
   public attach(
@@ -92,7 +91,11 @@ export class confirmPopup {
     onConfirm?: () => void,
     onCancel?: () => void,
   ): void {
-    element.addEventListener('click', (event) => {
+    if (!!element && this.showError) {
+      console.error('Target Element is not Defined');
+    }
+
+    element?.addEventListener('click', (event) => {
       event.stopPropagation();
       this.showPopper(element, onConfirm, onCancel);
     });
@@ -116,6 +119,10 @@ export class confirmPopup {
 
     if (this.popperInstance) {
       this.popperInstance.destroy();
+    }
+
+    if (!!targetElement && this.showError) {
+      console.error('Target Element is not Defined');
     }
 
     this.popperInstance = Popper.createPopper(

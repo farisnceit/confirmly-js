@@ -45,7 +45,9 @@ var confirmPopup = /*#__PURE__*/function () {
       defaultPlacement = _ref.defaultPlacement,
       targetElement = _ref.targetElement,
       onConfirm = _ref.onConfirm,
-      onCancel = _ref.onCancel;
+      onCancel = _ref.onCancel,
+      _ref$showError = _ref.showError,
+      showError = _ref$showError === undefined ? true : _ref$showError;
     _classCallCheck(this, confirmPopup);
     _defineProperty(this, "popperInstance", null);
     this.template = template || this.defaultTemplate();
@@ -58,6 +60,7 @@ var confirmPopup = /*#__PURE__*/function () {
       cancel: 'No'
     };
     this.defaultPlacement = defaultPlacement || 'top';
+    this.showError = showError;
     this.popperElement = this.createPopperElement();
     document.body.appendChild(this.popperElement);
     this.attach(targetElement, onConfirm, onCancel);
@@ -65,35 +68,47 @@ var confirmPopup = /*#__PURE__*/function () {
   return _createClass(confirmPopup, [{
     key: "defaultTemplate",
     value: function defaultTemplate() {
-      return "\n      <div class=\"confirmation-content\">\n        <p>Are you sure?</p>\n        <div class=\"arrow\" data-popper-arrow></div>\n        <button class=\"{{confirmClass}}\">{{confirmContent}}</button>\n        <button class=\"{{cancelClass}}\">{{cancelContent}}</button>\n      </div>\n    ";
+      return "\n      <div class=\"confirmation-content\">\n        <p>Are you sure?</p>\n        <div class=\"arrow\" data-popper-arrow></div>\n        <button class=\"{{confirmClass}}\" data-button=\"confirm\">{{confirmContent}}</button>\n        <button class=\"{{cancelClass}}\" data-button=\"cancel\">{{cancelContent}}</button>\n      </div>\n    ";
     }
   }, {
     key: "createPopperElement",
     value: function createPopperElement() {
-      var _popperDiv$querySelec,
-        _this = this,
-        _popperDiv$querySelec2;
       var popperDiv = document.createElement('div');
       popperDiv.className = 'confirmation-popper';
       popperDiv.style.display = 'none';
       popperDiv.style.position = 'absolute';
       var template = this.template.replace('{{confirmClass}}', this.buttonClasses.confirm).replace('{{cancelClass}}', this.buttonClasses.cancel).replace('{{confirmContent}}', this.buttonContents.confirm).replace('{{cancelContent}}', this.buttonContents.cancel);
       popperDiv.innerHTML = template;
-      var confirmClass = this.buttonClasses.confirm.replace(' ', '.');
-      (_popperDiv$querySelec = popperDiv.querySelector(".".concat(confirmClass))) === null || _popperDiv$querySelec === undefined || _popperDiv$querySelec.addEventListener('click', function () {
-        _this.handleConfirm();
-      });
-      var cancelClass = this.buttonClasses.cancel.replace(' ', '.');
-      (_popperDiv$querySelec2 = popperDiv.querySelector(".".concat(cancelClass))) === null || _popperDiv$querySelec2 === undefined || _popperDiv$querySelec2.addEventListener('click', function () {
-        _this.handleCancel();
-      });
+
+      // Ensure event listeners are added dynamically after template insertion
+      this.attachButtonListeners(popperDiv);
       return popperDiv;
+    }
+  }, {
+    key: "attachButtonListeners",
+    value: function attachButtonListeners(popperDiv) {
+      var _this = this;
+      var confirmButton = popperDiv.querySelector('[data-button="confirm"]');
+      var cancelButton = popperDiv.querySelector('[data-button="cancel"]');
+      if (confirmButton) {
+        confirmButton.addEventListener('click', function () {
+          _this.handleConfirm();
+        });
+      }
+      if (cancelButton) {
+        cancelButton.addEventListener('click', function () {
+          _this.handleCancel();
+        });
+      }
     }
   }, {
     key: "attach",
     value: function attach(element, onConfirm, onCancel) {
       var _this2 = this;
-      element.addEventListener('click', function (event) {
+      if (!!element && this.showError) {
+        console.error('Target Element is not Defined');
+      }
+      element === null || element === undefined || element.addEventListener('click', function (event) {
         event.stopPropagation();
         _this2.showPopper(element, onConfirm, onCancel);
       });
@@ -111,6 +126,9 @@ var confirmPopup = /*#__PURE__*/function () {
       this.popperElement.style.display = 'block';
       if (this.popperInstance) {
         this.popperInstance.destroy();
+      }
+      if (!!targetElement && this.showError) {
+        console.error('Target Element is not Defined');
       }
       this.popperInstance = Popper.createPopper(targetElement, this.popperElement, {
         placement: this.defaultPlacement,
