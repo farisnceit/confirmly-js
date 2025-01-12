@@ -1,6 +1,6 @@
 import Popper from '@popperjs/core';
 
-import { PopperOptions } from './constants'
+import { PopperOptions } from './constants';
 
 export class confirmPopup {
   private popperInstance: any = null;
