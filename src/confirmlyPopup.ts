@@ -1,4 +1,8 @@
-import { createPopper, Instance as PopperInstance, Placement } from '@popperjs/core';
+import {
+  createPopper,
+  Instance as PopperInstance,
+  Placement,
+} from '@popperjs/core';
 import { PopperOptions } from './constants';
 
 export class ConfirmPopup {
@@ -14,9 +18,9 @@ export class ConfirmPopup {
 
   constructor({
     template,
-    buttonClasses = { 
-      confirm: 'confirmly__button confirmly__button--confirm', 
-      cancel: 'confirmly__button confirmly__button--cancel' 
+    buttonClasses = {
+      confirm: 'confirmly__button confirmly__button--confirm',
+      cancel: 'confirmly__button confirmly__button--cancel',
     },
     buttonContents = { confirm: 'Yes', cancel: 'No' },
     defaultPlacement = 'top',
@@ -134,7 +138,7 @@ export class ConfirmPopup {
   private showPopper(targetElement: HTMLElement) {
     this.popperElement.style.display = 'block';
     const popup = this.popperElement.querySelector('.confirmly__popup');
-    
+
     if (popup) {
       // Add visible class after a small delay to trigger animation
       requestAnimationFrame(() => {
@@ -175,7 +179,7 @@ export class ConfirmPopup {
 
   private hidePopper(): void {
     const popup = this.popperElement.querySelector('.confirmly__popup');
-    
+
     if (popup) {
       popup.classList.remove('confirmly__popup--visible');
       // Wait for animation to complete
