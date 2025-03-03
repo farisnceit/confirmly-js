@@ -1,59 +1,65 @@
-import Popper from '@popperjs/core';
-
+import { createPopper, Instance as PopperInstance, Placement } from '@popperjs/core';
 import { PopperOptions } from './constants';
 
-export class confirmPopup {
-  private popperInstance: any = null;
-  private template: string;
-  private buttonClasses: { confirm: string; cancel: string };
-  private buttonContents: { confirm: string; cancel: string };
-  private defaultPlacement: Popper.Placement;
-  private popperElement: HTMLElement;
+export class ConfirmPopup {
+  private popperInstance: PopperInstance | null = null;
+  private readonly template: string;
+  private readonly buttonClasses: { confirm: string; cancel: string };
+  private readonly buttonContents: { confirm: string; cancel: string };
+  private readonly defaultPlacement: Placement;
+  private readonly popperElement: HTMLElement;
   private onConfirmCallback?: () => void;
   private onCancelCallback?: () => void;
-  private showError: boolean;
+  private readonly showError: boolean;
 
   constructor({
     template,
-    buttonClasses,
-    buttonContents,
-    defaultPlacement,
+    buttonClasses = { 
+      confirm: 'confirmly__button confirmly__button--confirm', 
+      cancel: 'confirmly__button confirmly__button--cancel' 
+    },
+    buttonContents = { confirm: 'Yes', cancel: 'No' },
+    defaultPlacement = 'top',
     targetElement,
     onConfirm,
     onCancel,
     showError = true,
   }: PopperOptions) {
     this.template = template || this.defaultTemplate();
-    this.buttonClasses = buttonClasses || {
-      confirm: 'confirm-btn',
-      cancel: 'cancel-btn',
-    };
-    this.buttonContents = buttonContents || { confirm: 'Yes', cancel: 'No' };
-    this.defaultPlacement = defaultPlacement || 'top';
+    this.buttonClasses = buttonClasses;
+    this.buttonContents = buttonContents;
+    this.defaultPlacement = defaultPlacement;
     this.showError = showError;
 
     this.popperElement = this.createPopperElement();
     document.body.appendChild(this.popperElement);
 
-    this.attach(targetElement, onConfirm, onCancel);
+    if (targetElement) {
+      this.attach(targetElement, onConfirm, onCancel);
+    } else if (this.showError) {
+      console.error('Target Element is not defined');
+    }
   }
 
   private defaultTemplate(): string {
     return `
-      <div class="confirmation-content">
-        <p>Are you sure?</p>
-        <div class="arrow" data-popper-arrow></div>
-        <button class="{{confirmClass}}" data-button="confirm">{{confirmContent}}</button>
-        <button class="{{cancelClass}}" data-button="cancel">{{cancelContent}}</button>
+      <div class="confirmly__popup">
+        <div class="confirmly__content">
+          <p class="confirmly__message">Are you sure?</p>
+          <div class="confirmly__buttons">
+            <button class="{{confirmClass}}" data-button="cancel">{{cancelContent}}</button>
+            <button class="{{confirmClass}}" data-button="confirm">{{confirmContent}}</button>
+          </div>
+        </div>
+        <div class="confirmly__arrow" data-popper-arrow></div>
       </div>
     `;
   }
 
   private createPopperElement(): HTMLElement {
     const popperDiv = document.createElement('div');
-    popperDiv.className = 'confirmation-popper';
+    popperDiv.className = 'confirmly';
     popperDiv.style.display = 'none';
-    popperDiv.style.position = 'absolute';
 
     const template = this.template
       .replace('{{confirmClass}}', this.buttonClasses.confirm)
@@ -62,8 +68,6 @@ export class confirmPopup {
       .replace('{{cancelContent}}', this.buttonContents.cancel);
 
     popperDiv.innerHTML = template;
-
-    // Ensure event listeners are added dynamically after template insertion
     this.attachButtonListeners(popperDiv);
 
     return popperDiv;
@@ -74,15 +78,11 @@ export class confirmPopup {
     const cancelButton = popperDiv.querySelector('[data-button="cancel"]');
 
     if (confirmButton) {
-      confirmButton.addEventListener('click', () => {
-        this.handleConfirm();
-      });
+      confirmButton.addEventListener('click', this.handleConfirm.bind(this));
     }
 
     if (cancelButton) {
-      cancelButton.addEventListener('click', () => {
-        this.handleCancel();
-      });
+      cancelButton.addEventListener('click', this.handleCancel.bind(this));
     }
   }
 
@@ -91,82 +91,111 @@ export class confirmPopup {
     onConfirm?: () => void,
     onCancel?: () => void,
   ): void {
-    if (!!element && this.showError) {
-      console.error('Target Element is not Defined');
+    if (!element && this.showError) {
+      console.error('Target Element is not defined');
+      return;
     }
 
-    element?.addEventListener('click', (event) => {
-      event.stopPropagation();
-      this.showPopper(element, onConfirm, onCancel);
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!this.popperElement.contains(event.target as Node)) {
-        this.hidePopper();
-      }
-    });
-  }
-
-  private showPopper(
-    targetElement: HTMLElement,
-    onConfirm?: () => void,
-    onCancel?: () => void,
-  ) {
     this.onConfirmCallback = onConfirm;
     this.onCancelCallback = onCancel;
 
-    this.popperElement.style.display = 'block';
+    element?.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      this.showPopper(element);
+    });
 
-    if (this.popperInstance) {
-      this.popperInstance.destroy();
-    }
-
-    if (!!targetElement && this.showError) {
-      console.error('Target Element is not Defined');
-    }
-
-    this.popperInstance = Popper.createPopper(
-      targetElement,
-      this.popperElement,
-      {
-        placement: this.defaultPlacement,
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 8],
-            },
-          },
-          {
-            name: 'arrow',
-            options: {
-              element: '[data-popper-arrow]',
-            },
-          },
-        ],
-      },
-    );
+    document.addEventListener('click', this.handleOutsideClick.bind(this));
+    document.addEventListener('keydown', this.handleEscapeKey.bind(this));
   }
 
-  private hidePopper() {
+  public destroy(): void {
     if (this.popperInstance) {
       this.popperInstance.destroy();
       this.popperInstance = null;
     }
-    this.popperElement.style.display = 'none';
+    this.popperElement.remove();
+    document.removeEventListener('click', this.handleOutsideClick.bind(this));
+    document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
   }
 
-  private handleConfirm() {
-    if (this.onConfirmCallback) {
-      this.onConfirmCallback();
+  private handleOutsideClick(event: MouseEvent): void {
+    if (!this.popperElement.contains(event.target as Node)) {
+      this.hidePopper();
     }
+  }
+
+  private handleEscapeKey(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      this.hidePopper();
+    }
+  }
+
+  private showPopper(targetElement: HTMLElement) {
+    this.popperElement.style.display = 'block';
+    const popup = this.popperElement.querySelector('.confirmly__popup');
+    
+    if (popup) {
+      // Add visible class after a small delay to trigger animation
+      requestAnimationFrame(() => {
+        popup.classList.add('confirmly__popup--visible');
+      });
+    }
+
+    if (this.popperInstance) {
+      this.popperInstance.destroy();
+    }
+
+    this.popperInstance = createPopper(targetElement, this.popperElement, {
+      placement: this.defaultPlacement,
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 8],
+          },
+        },
+        {
+          name: 'arrow',
+          options: {
+            element: '[data-popper-arrow]',
+            padding: 8,
+          },
+        },
+        {
+          name: 'preventOverflow',
+          options: {
+            padding: 8,
+            boundary: 'viewport',
+          },
+        },
+      ],
+    });
+  }
+
+  private hidePopper(): void {
+    const popup = this.popperElement.querySelector('.confirmly__popup');
+    
+    if (popup) {
+      popup.classList.remove('confirmly__popup--visible');
+      // Wait for animation to complete
+      setTimeout(() => {
+        if (this.popperInstance) {
+          this.popperInstance.destroy();
+          this.popperInstance = null;
+        }
+        this.popperElement.style.display = 'none';
+      }, 200);
+    }
+  }
+
+  private handleConfirm(): void {
+    this.onConfirmCallback?.();
     this.hidePopper();
   }
 
-  private handleCancel() {
-    if (this.onCancelCallback) {
-      this.onCancelCallback();
-    }
+  private handleCancel(): void {
+    this.onCancelCallback?.();
     this.hidePopper();
   }
 }
