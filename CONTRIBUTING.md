@@ -5,22 +5,26 @@ Thank you for your interest in contributing to Confirmly-Popup! This document pr
 ## Development Setup
 
 1. Fork and clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/confirmly-popup.git
 cd confirmly-popup
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start development:
+
 ```bash
 npm run watch
 ```
 
 4. Run linting and formatting:
+
 ```bash
 npm run lint
 npm run format
@@ -29,6 +33,7 @@ npm run format
 ## Development Guidelines
 
 ### Code Style
+
 - Follow TypeScript best practices
 - Use ESLint and Prettier for code formatting
 - Write meaningful commit messages following conventional commits
@@ -36,12 +41,14 @@ npm run format
 - Maintain type safety with TypeScript
 
 ### Testing
+
 - Add test cases for new features
 - Ensure existing tests pass
 - Test across different browsers
 - Check mobile responsiveness
 
 ### Documentation
+
 - Update README.md for new features
 - Add JSDoc comments for new methods
 - Update example files if needed
@@ -50,28 +57,33 @@ npm run format
 ## Pull Request Process
 
 1. Create a new branch for your feature:
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 2. Make your changes and commit:
+
 ```bash
 git add .
 git commit -m "feat: add your feature"
 ```
 
 3. Push to your fork:
+
 ```bash
 git push origin feature/your-feature-name
 ```
 
 4. Create a Pull Request:
+
 - Go to the original repository
 - Click "New Pull Request"
 - Select your branch
 - Fill in the PR template
 
 ### PR Requirements
+
 - Describe the changes clearly
 - Reference any related issues
 - Update documentation if needed

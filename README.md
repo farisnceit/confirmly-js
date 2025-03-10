@@ -37,7 +37,7 @@ const popup = new ConfirmPopup({
   },
   onCancel: () => {
     console.log('Cancelled!');
-  }
+  },
 });
 ```
 
@@ -58,11 +58,11 @@ const popup = new ConfirmPopup({
   `,
   buttonClasses: {
     confirm: 'btn btn-primary',
-    cancel: 'btn btn-secondary'
+    cancel: 'btn btn-secondary',
   },
   buttonContents: {
     confirm: 'Yes, proceed',
-    cancel: 'No, go back'
+    cancel: 'No, go back',
   },
   defaultPlacement: 'top',
   showError: true,
@@ -71,7 +71,7 @@ const popup = new ConfirmPopup({
   },
   onCancel: () => {
     console.log('Action cancelled');
-  }
+  },
 });
 ```
 
@@ -79,16 +79,16 @@ const popup = new ConfirmPopup({
 
 ### Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `targetElement` | HTMLElement | Required | The element that triggers the popup |
-| `template` | string | Default template | Custom HTML template for the popup |
-| `buttonClasses` | object | `{ confirm: 'confirm-btn', cancel: 'cancel-btn' }` | CSS classes for buttons |
-| `buttonContents` | object | `{ confirm: 'Yes', cancel: 'No' }` | Button text content |
-| `defaultPlacement` | string | 'top' | Popup placement (top, bottom, left, right) |
-| `showError` | boolean | true | Show console errors |
-| `onConfirm` | function | undefined | Callback for confirm action |
-| `onCancel` | function | undefined | Callback for cancel action |
+| Option             | Type        | Default                                            | Description                                |
+| ------------------ | ----------- | -------------------------------------------------- | ------------------------------------------ |
+| `targetElement`    | HTMLElement | Required                                           | The element that triggers the popup        |
+| `template`         | string      | Default template                                   | Custom HTML template for the popup         |
+| `buttonClasses`    | object      | `{ confirm: 'confirm-btn', cancel: 'cancel-btn' }` | CSS classes for buttons                    |
+| `buttonContents`   | object      | `{ confirm: 'Yes', cancel: 'No' }`                 | Button text content                        |
+| `defaultPlacement` | string      | 'top'                                              | Popup placement (top, bottom, left, right) |
+| `showError`        | boolean     | true                                               | Show console errors                        |
+| `onConfirm`        | function    | undefined                                          | Callback for confirm action                |
+| `onCancel`         | function    | undefined                                          | Callback for cancel action                 |
 
 ### Methods
 
@@ -107,7 +107,7 @@ The popup comes with minimal default styling. You can easily customize it using 
 .confirmly-popup {
   background: white;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
 }
 

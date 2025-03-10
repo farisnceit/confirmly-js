@@ -1,175 +1,177 @@
 /* CSS Variables */
 :root {
-    /* Colors */
-    --confirmly-bg-color: #ffffff;
-    --confirmly-text-color: #374151;
-    --confirmly-border-color: #e5e7eb;
-    --confirmly-shadow-color: rgba(0, 0, 0, 0.1);
-    
-    /* Primary Button Colors */
-    --confirmly-primary-bg: #3b82f6;
-    --confirmly-primary-hover: #2563eb;
-    --confirmly-primary-text: #ffffff;
-    
-    /* Secondary Button Colors */
-    --confirmly-secondary-bg: #e5e7eb;
-    --confirmly-secondary-hover: #d1d5db;
-    --confirmly-secondary-text: #374151;
-    
-    /* Spacing */
-    --confirmly-spacing-xs: 0.25rem;
-    --confirmly-spacing-sm: 0.5rem;
-    --confirmly-spacing-md: 1rem;
-    --confirmly-spacing-lg: 1.5rem;
-    
-    /* Border Radius */
-    --confirmly-radius-sm: 0.25rem;
-    --confirmly-radius-md: 0.375rem;
-    
-    /* Font Sizes */
-    --confirmly-font-sm: 0.875rem;
-    --confirmly-font-md: 1rem;
-    
-    /* Transitions */
-    --confirmly-transition: 200ms ease-in-out;
-    
-    /* Z-index */
-    --confirmly-z-index: 9999;
+  /* Colors */
+  --confirmly-bg-color: #ffffff;
+  --confirmly-text-color: #374151;
+  --confirmly-border-color: #e5e7eb;
+  --confirmly-shadow-color: rgba(0, 0, 0, 0.1);
+
+  /* Primary Button Colors */
+  --confirmly-primary-bg: #3b82f6;
+  --confirmly-primary-hover: #2563eb;
+  --confirmly-primary-text: #ffffff;
+
+  /* Secondary Button Colors */
+  --confirmly-secondary-bg: #e5e7eb;
+  --confirmly-secondary-hover: #d1d5db;
+  --confirmly-secondary-text: #374151;
+
+  /* Spacing */
+  --confirmly-spacing-xs: 0.25rem;
+  --confirmly-spacing-sm: 0.5rem;
+  --confirmly-spacing-md: 1rem;
+  --confirmly-spacing-lg: 1.5rem;
+
+  /* Border Radius */
+  --confirmly-radius-sm: 0.25rem;
+  --confirmly-radius-md: 0.375rem;
+
+  /* Font Sizes */
+  --confirmly-font-sm: 0.875rem;
+  --confirmly-font-md: 1rem;
+
+  /* Transitions */
+  --confirmly-transition: 200ms ease-in-out;
+
+  /* Z-index */
+  --confirmly-z-index: 9999;
 }
 
 /* BEM Classes */
 .confirmly {
-    position: fixed;
-    z-index: var(--confirmly-z-index);
+  position: fixed;
+  z-index: var(--confirmly-z-index);
 }
 
 .confirmly__popup {
-    background: var(--confirmly-bg-color);
-    border-radius: var(--confirmly-radius-md);
-    box-shadow: 0 4px 6px -1px var(--confirmly-shadow-color);
-    padding: var(--confirmly-spacing-md);
-    max-width: 320px;
-    width: 100%;
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity var(--confirmly-transition),
-                transform var(--confirmly-transition);
+  background: var(--confirmly-bg-color);
+  border-radius: var(--confirmly-radius-md);
+  box-shadow: 0 4px 6px -1px var(--confirmly-shadow-color);
+  padding: var(--confirmly-spacing-md);
+  max-width: 320px;
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity var(--confirmly-transition),
+    transform var(--confirmly-transition);
 }
 
 .confirmly__popup--visible {
-    opacity: 1;
-    transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 
 .confirmly__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--confirmly-spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--confirmly-spacing-md);
 }
 
 .confirmly__message {
-    margin: 0;
-    color: var(--confirmly-text-color);
-    font-size: var(--confirmly-font-sm);
-    line-height: 1.5;
+  margin: 0;
+  color: var(--confirmly-text-color);
+  font-size: var(--confirmly-font-sm);
+  line-height: 1.5;
 }
 
 .confirmly__buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--confirmly-spacing-sm);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--confirmly-spacing-sm);
 }
 
 .confirmly__button {
-    padding: var(--confirmly-spacing-sm) var(--confirmly-spacing-md);
-    font-size: var(--confirmly-font-sm);
-    border-radius: var(--confirmly-radius-md);
-    cursor: pointer;
-    border: none;
-    transition: background-color var(--confirmly-transition),
-                transform var(--confirmly-transition);
+  padding: var(--confirmly-spacing-sm) var(--confirmly-spacing-md);
+  font-size: var(--confirmly-font-sm);
+  border-radius: var(--confirmly-radius-md);
+  cursor: pointer;
+  border: none;
+  transition:
+    background-color var(--confirmly-transition),
+    transform var(--confirmly-transition);
 }
 
 .confirmly__button:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .confirmly__button--confirm {
-    background-color: var(--confirmly-primary-bg);
-    color: var(--confirmly-primary-text);
+  background-color: var(--confirmly-primary-bg);
+  color: var(--confirmly-primary-text);
 }
 
 .confirmly__button--confirm:hover {
-    background-color: var(--confirmly-primary-hover);
+  background-color: var(--confirmly-primary-hover);
 }
 
 .confirmly__button--cancel {
-    background-color: var(--confirmly-secondary-bg);
-    color: var(--confirmly-secondary-text);
+  background-color: var(--confirmly-secondary-bg);
+  color: var(--confirmly-secondary-text);
 }
 
 .confirmly__button--cancel:hover {
-    background-color: var(--confirmly-secondary-hover);
+  background-color: var(--confirmly-secondary-hover);
 }
 
 /* Arrow */
 .confirmly__arrow {
-    position: absolute;
-    width: var(--confirmly-spacing-md);
-    height: var(--confirmly-spacing-md);
-    background: var(--confirmly-bg-color);
-    visibility: hidden;
+  position: absolute;
+  width: var(--confirmly-spacing-md);
+  height: var(--confirmly-spacing-md);
+  background: var(--confirmly-bg-color);
+  visibility: hidden;
 }
 
 .confirmly__arrow::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    transform: rotate(45deg);
-    visibility: visible;
-    box-shadow: -1px -1px 1px -1px var(--confirmly-shadow-color);
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  transform: rotate(45deg);
+  visibility: visible;
+  box-shadow: -1px -1px 1px -1px var(--confirmly-shadow-color);
 }
 
 /* Arrow Positions */
 [data-popper-placement^='top'] .confirmly__arrow {
-    bottom: calc(var(--confirmly-spacing-md) * -0.5);
+  bottom: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
 [data-popper-placement^='bottom'] .confirmly__arrow {
-    top: calc(var(--confirmly-spacing-md) * -0.5);
+  top: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
 [data-popper-placement^='left'] .confirmly__arrow {
-    right: calc(var(--confirmly-spacing-md) * -0.5);
+  right: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
 [data-popper-placement^='right'] .confirmly__arrow {
-    left: calc(var(--confirmly-spacing-md) * -0.5);
+  left: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
 /* Themes */
 .confirmly__popup--warning {
-    --confirmly-primary-bg: #dc2626;
-    --confirmly-primary-hover: #b91c1c;
-    background-color: #fef2f2;
-    border: 1px solid #fee2e2;
+  --confirmly-primary-bg: #dc2626;
+  --confirmly-primary-hover: #b91c1c;
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
 }
 
 .confirmly__popup--warning .confirmly__message {
-    color: #991b1b;
+  color: #991b1b;
 }
 
 .confirmly__popup--warning .confirmly__arrow::before {
-    background-color: #fef2f2;
-    border: 1px solid #fee2e2;
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
 }
 
 /* Responsive */
 @media (max-width: 640px) {
-    .confirmly__popup {
-        max-width: calc(100vw - var(--confirmly-spacing-md) * 2);
-        margin: 0 var(--confirmly-spacing-md);
-    }
+  .confirmly__popup {
+    max-width: calc(100vw - var(--confirmly-spacing-md) * 2);
+    margin: 0 var(--confirmly-spacing-md);
+  }
 }

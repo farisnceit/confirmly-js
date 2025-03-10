@@ -1,16 +1,44 @@
 {
   "name": "confirmly-popup",
   "version": "1.1.2",
+  "type": "module",
   "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
-  "main": "dist/confirmly-popup.cdn.js",
+  "keywords": [
+    "confirmation",
+    "popup",
+    "dialog",
+    "modal",
+    "javascript",
+    "typescript",
+    "bootstrap",
+    "tailwind",
+    "material-design",
+    "ui",
+    "confirm-dialog",
+    "confirmation-modal"
+  ],
+  "main": "./dist/confirmly-popup.umd.js",
+  "module": "./dist/confirmly-popup.esm.js",
+  "unpkg": "./dist/confirmly-popup.umd.min.js",
+  "types": "./dist/types/confirmlyPopup.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/confirmly-popup.esm.js",
+      "require": "./dist/confirmly-popup.umd.js",
+      "umd": "./dist/confirmly-popup.umd.min.js",
+      "types": "./dist/types/confirmlyPopup.d.ts"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w",
-    "lint": "eslint --fix 'src/**/*.{ts,js}'",
-    "format": "prettier --write 'src/**/*.{ts,js,css,html}'",
-    "lint:check": "eslint 'src/**/*.{ts,js}'",
-    "format:check": "prettier --check 'src/**/*.{ts,js,css,html}'",
-    "prepare": "husky"
+    "lint": "eslint --fix .",
+    "format": "prettier --write .",
+    "lint:check": "eslint .",
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "prepublish": "npm run lint:check && npm run format:check && npm run build"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.25.9",
@@ -22,11 +50,13 @@
     "@rollup/plugin-eslint": "^9.0.5",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.3.0",
