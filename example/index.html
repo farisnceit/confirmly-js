@@ -4,48 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmation Popper</title>
-    <!-- Link to your custom styles or CDN version -->
-    <link rel="stylesheet" href="../styles/confirmation-popper.css">
-    <!-- You can also include Bootstrap or Materialize if needed -->
-    {#
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> #}
+    <title>Confirmly Popup Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-
-    <button id="actionButton"
-        class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Click
-        me</button>
-
-
     <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="../dist/confirmly-popup.umd.js"></script>
-    <script>
-        const targetElement = document.getElementById('actionButton');
-        const targetElement1 = document.getElementById('actionButton1');
+    <link rel="stylesheet" href="../styles/confirmly-popup.css">
+</head>
 
-        const popper = new confirmly.confirmPopup({
-            targetElement: targetElement,
-            buttonClasses: { confirm: 'btn btn-success', cancel: 'btn btn-danger' },
-            buttonContents: { confirm: 'Yes', cancel: 'No' },
-            defaultPlacement: 'bottom',
-            onConfirm: () => { console.log('Confirmed!'); },
-            onCancel: () => { console.log('Cancelled!'); }
+<body class="min-h-screen bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Confirmly Popup</h1>
+            <p class="text-lg text-gray-600">A lightweight, customizable confirmation popup library</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Basic Example -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">Basic Example</h2>
+                <p class="text-gray-600 mb-4">Simple confirmation with default styling</p>
+                <button id="basicButton"
+                    class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                    Delete Item
+                </button>
+            </div>
+
+            <!-- Warning Theme -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">Warning Theme</h2>
+                <p class="text-gray-600 mb-4">Dangerous action confirmation</p>
+                <button id="warningButton"
+                    class="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
+                    Dangerous Action
+                </button>
+            </div>
+
+            <!-- Different Placements -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">Different Placements</h2>
+                <p class="text-gray-600 mb-4">Try different popup positions</p>
+                <div class="flex flex-wrap gap-2">
+                    <button id="topButton"
+                        class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                        Top
+                    </button>
+                    <button id="rightButton"
+                        class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                        Right
+                    </button>
+                    <button id="bottomButton"
+                        class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                        Bottom
+                    </button>
+                    <button id="leftButton"
+                        class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+                        Left
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Template -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">Custom Template</h2>
+                <p class="text-gray-600 mb-4">Fully customized popup example</p>
+                <button id="customButton"
+                    class="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500">
+                    Custom Popup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Basic Example
+        new confirmly.ConfirmPopup({
+            targetElement: document.getElementById('basicButton'),
+            onConfirm: () => { console.log('Basic action confirmed!'); },
+            onCancel: () => { console.log('Basic action cancelled!'); }
         });
 
+        // Warning Theme Example
+        new confirmly.ConfirmPopup({
+            targetElement: document.getElementById('warningButton'),
+            template: `
+                <div class="confirmly__popup confirmly__popup--warning">
+                    <div class="confirmly__content">
+                        <p class="confirmly__message">⚠️ Warning: This action cannot be undone!</p>
+                        <div class="confirmly__buttons">
+                            <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Cancel</button>
+                            <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Yes, proceed</button>
+                        </div>
+                    </div>
+                    <div class="confirmly__arrow" data-popper-arrow></div>
+                </div>
+            `,
+            onConfirm: () => { console.log('Dangerous action confirmed!'); },
+            onCancel: () => { console.log('Dangerous action cancelled!'); }
+        });
 
-        const popper2 = new confirmly.confirmPopup({
-            targetElement: targetElement1,
-            buttonClasses: { confirm: 'btn btn-success', cancel: 'btn btn-danger' },
-            buttonContents: { confirm: 'Yes', cancel: 'No' },
-            defaultPlacement: 'bottom',
-            onConfirm: () => { console.log('Confirmed!1'); },
-            onCancel: () => { console.log('Cancelled!1'); }
+        // Different Placements
+        ['top', 'right', 'bottom', 'left'].forEach(placement => {
+            new confirmly.ConfirmPopup({
+                targetElement: document.getElementById(`${placement}Button`),
+                defaultPlacement: placement,
+                buttonContents: {
+                    confirm: 'Proceed',
+                    cancel: 'Back'
+                },
+                onConfirm: () => { console.log(`${placement} action confirmed!`); },
+                onCancel: () => { console.log(`${placement} action cancelled!`); }
+            });
+        });
+
+        // Custom Template Example
+        new confirmly.ConfirmPopup({
+            targetElement: document.getElementById('customButton'),
+            template: `
+                <div class="confirmly__popup" style="--confirmly-primary-bg: #22c55e; --confirmly-primary-hover: #16a34a;">
+                    <div class="confirmly__content">
+                        <p class="confirmly__message">
+                            <span class="text-green-600 font-medium">✓</span> 
+                            Would you like to save these changes?
+                        </p>
+                        <div class="confirmly__buttons">
+                            <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Discard</button>
+                            <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Save Changes</button>
+                        </div>
+                    </div>
+                    <div class="confirmly__arrow" data-popper-arrow></div>
+                </div>
+            `,
+            onConfirm: () => { console.log('Custom action confirmed!'); },
+            onCancel: () => { console.log('Custom action cancelled!'); }
         });
     </script>
-
 </body>
 
 </html>
