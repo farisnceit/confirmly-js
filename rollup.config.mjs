@@ -46,7 +46,7 @@ export default {
   plugins: [
     eslint({
       fix: true,
-      overrideConfigFile: './eslint.config.cjs',
+      overrideConfigFile: './eslint.config.mjs',
     }),
     babel({
       babelHelpers: 'bundled',
