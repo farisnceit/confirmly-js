@@ -9,5 +9,8 @@
     "eslint.codeActionsOnSave": true,
     "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
     "prettier.requireConfig": true,
+    "conventionalCommits.scopes": [
+      "new"
+    ],
   }
   
