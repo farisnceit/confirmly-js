@@ -51,7 +51,7 @@ export class ConfirmPopup {
         <div class="confirmly__content">
           <p class="confirmly__message">Are you sure?</p>
           <div class="confirmly__buttons">
-            <button class="{{confirmClass}}" data-button="cancel">{{cancelContent}}</button>
+            <button class="{{cancelClass}}" data-button="cancel">{{cancelContent}}</button>
             <button class="{{confirmClass}}" data-button="confirm">{{confirmContent}}</button>
           </div>
         </div>
@@ -140,7 +140,6 @@ export class ConfirmPopup {
     const popup = this.popperElement.querySelector('.confirmly__popup');
 
     if (popup) {
-      // Add visible class after a small delay to trigger animation
       requestAnimationFrame(() => {
         popup.classList.add('confirmly__popup--visible');
       });
@@ -182,7 +181,6 @@ export class ConfirmPopup {
 
     if (popup) {
       popup.classList.remove('confirmly__popup--visible');
-      // Wait for animation to complete
       setTimeout(() => {
         if (this.popperInstance) {
           this.popperInstance.destroy();
