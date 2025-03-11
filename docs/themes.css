@@ -1,0 +1,118 @@
+/* Confirmly Popup Theme Variations */
+
+/* Success Theme */
+.confirmly__popup--success {
+  --confirmly-primary-bg: #10b981;
+  --confirmly-primary-hover: #059669;
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+}
+
+.confirmly__popup--success .confirmly__message {
+  color: #065f46;
+}
+
+.confirmly__popup--success .confirmly__arrow::before {
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+}
+
+/* Info Theme */
+.confirmly__popup--info {
+  --confirmly-primary-bg: #3b82f6;
+  --confirmly-primary-hover: #2563eb;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+.confirmly__popup--info .confirmly__message {
+  color: #1e40af;
+}
+
+.confirmly__popup--info .confirmly__arrow::before {
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+/* Dark Theme */
+.confirmly__popup--dark {
+  --confirmly-primary-bg: #4b5563;
+  --confirmly-primary-hover: #374151;
+  --confirmly-secondary-bg: #6b7280;
+  --confirmly-secondary-hover: #4b5563;
+  --confirmly-secondary-text: #f3f4f6;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+}
+
+.confirmly__popup--dark .confirmly__message {
+  color: #f3f4f6;
+}
+
+.confirmly__popup--dark .confirmly__arrow::before {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+}
+
+/* Material Design Theme */
+.confirmly__popup--material {
+  --confirmly-primary-bg: #6200ee;
+  --confirmly-primary-hover: #3700b3;
+  --confirmly-secondary-bg: #f5f5f5;
+  --confirmly-secondary-hover: #e0e0e0;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow:
+    0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  padding: 16px;
+}
+
+.confirmly__popup--material .confirmly__button {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.0892857143em;
+}
+
+.confirmly__popup--material .confirmly__button--confirm {
+  background-color: var(--confirmly-primary-bg);
+}
+
+.confirmly__popup--material .confirmly__button--cancel {
+  color: var(--confirmly-primary-bg);
+  background-color: transparent;
+}
+
+.confirmly__popup--material .confirmly__arrow::before {
+  background-color: #ffffff;
+}
+
+/* Bootstrap Theme */
+.confirmly__popup--bootstrap {
+  --confirmly-primary-bg: #0d6efd;
+  --confirmly-primary-hover: #0b5ed7;
+  --confirmly-secondary-bg: #6c757d;
+  --confirmly-secondary-hover: #5c636a;
+  --confirmly-secondary-text: #ffffff;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+}
+
+.confirmly__popup--bootstrap .confirmly__button {
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+}
+
+/* Rounded Theme */
+.confirmly__popup--rounded {
+  border-radius: 24px;
+}
+
+.confirmly__popup--rounded .confirmly__button {
+  border-radius: 24px;
+  padding: 8px 16px;
+}

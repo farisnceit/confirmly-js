@@ -1,0 +1,122 @@
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  overflow-y: auto;
+  z-index: 40;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-logo {
+  margin-right: 0.75rem;
+  color: #3b82f6;
+}
+
+.sidebar-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.sidebar-nav {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-nav-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-nav-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.sidebar-nav-item {
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-nav-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  color: #4b5563;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.sidebar-nav-link:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.sidebar-nav-link.active {
+  background-color: #eff6ff;
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Mobile sidebar toggle */
+.sidebar-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  cursor: pointer;
+  border: none;
+  display: none;
+}
+
+/* Main content adjustment */
+.with-sidebar {
+  margin-left: 250px;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  .with-sidebar {
+    margin-left: 0;
+  }
+}

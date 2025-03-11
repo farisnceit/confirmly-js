@@ -24,6 +24,12 @@ Or use via CDN:
 <script src="https://unpkg.com/confirmly-popup/dist/confirmly-popup.cdn.js"></script>
 ```
 
+## Live Demo
+
+Check out the live demo to see Confirmly in action with various themes, placements, and customization options:
+
+[**View Demo**](https://farisnceit.github.io/confirmly-js/docs/)
+
 ## Basic Usage
 
 ```javascript
