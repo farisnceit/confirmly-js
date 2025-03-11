@@ -44,7 +44,9 @@
   width: 100%;
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity var(--confirmly-transition), transform var(--confirmly-transition);
+  transition:
+    opacity var(--confirmly-transition),
+    transform var(--confirmly-transition);
 }
 .confirmly__popup--visible {
   opacity: 1;
@@ -72,7 +74,9 @@
   border-radius: var(--confirmly-radius-md);
   cursor: pointer;
   border: none;
-  transition: background-color var(--confirmly-transition), transform var(--confirmly-transition);
+  transition:
+    background-color var(--confirmly-transition),
+    transform var(--confirmly-transition);
 }
 .confirmly__button:active {
   transform: scale(0.98);
@@ -99,7 +103,7 @@
   visibility: hidden;
 }
 .confirmly__arrow::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -110,19 +114,19 @@
 }
 
 /* Arrow Positions */
-[data-popper-placement^=top] .confirmly__arrow {
+[data-popper-placement^='top'] .confirmly__arrow {
   bottom: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
-[data-popper-placement^=bottom] .confirmly__arrow {
+[data-popper-placement^='bottom'] .confirmly__arrow {
   top: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
-[data-popper-placement^=left] .confirmly__arrow {
+[data-popper-placement^='left'] .confirmly__arrow {
   right: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
-[data-popper-placement^=right] .confirmly__arrow {
+[data-popper-placement^='right'] .confirmly__arrow {
   left: calc(var(--confirmly-spacing-md) * -0.5);
 }
 
@@ -178,7 +182,10 @@
   --confirmly-secondary-hover: #e0e0e0;
   background-color: #ffffff;
   border-radius: 4px;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12);
   padding: 16px;
 }
 .confirmly__popup--material .confirmly__button {
