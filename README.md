@@ -6,7 +6,7 @@ A lightweight, customizable JavaScript confirmation popup library with TypeScrip
 
 Check out the live demo to see Confirmly in action with various themes, placements, and customization options:
 
-[**View Demo**](https://farisnceit.github.io/confirmly-js/docs/)
+[**View Demo**](https://farisnceit.github.io/confirmly-js/)
 
 ## Features
 
