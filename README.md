@@ -1,6 +1,12 @@
-# Confirmly-Popup
+# Confirmly-Popup.js
 
 A lightweight, customizable JavaScript confirmation popup library with TypeScript support. Built on top of Popper.js for perfect positioning and works seamlessly with Bootstrap, Tailwind CSS, or any custom styling.
+
+## Live Demo
+
+Check out the live demo to see Confirmly in action with various themes, placements, and customization options:
+
+[**View Demo**](https://farisnceit.github.io/confirmly-js/docs/)
 
 ## Features
 
@@ -15,25 +21,23 @@ A lightweight, customizable JavaScript confirmation popup library with TypeScrip
 ## Installation
 
 ```bash
-npm install confirmly-popup
+npm i confirmly-popup.js
+```
+
+```bash
+pnpm i confirmly-popup.js
 ```
 
 Or use via CDN:
 
 ```html
-<script src="https://unpkg.com/confirmly-popup/dist/confirmly-popup.cdn.js"></script>
+<script src="https://unpkg.com/confirmly-popup.js@1.3.0/dist/confirmly-popup.umd.min.js"></script>
 ```
-
-## Live Demo
-
-Check out the live demo to see Confirmly in action with various themes, placements, and customization options:
-
-[**View Demo**](https://farisnceit.github.io/confirmly-js/docs/)
 
 ## Basic Usage
 
 ```javascript
-import { ConfirmPopup } from 'confirmly-popup';
+import { ConfirmPopup } from 'confirmly-popup.js';
 
 // Create a new confirmation popup
 const popup = new ConfirmPopup({
