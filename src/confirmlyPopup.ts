@@ -5,6 +5,8 @@ import {
 } from '@popperjs/core';
 import { PopperOptions } from './constants';
 
+import '../styles/confirmly-popup.scss';
+
 export class ConfirmPopup {
   private popperInstance: PopperInstance | null = null;
   private readonly template: string;

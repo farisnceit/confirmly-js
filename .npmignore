@@ -12,6 +12,7 @@ src/
 eslint.config.mjs
 rollup.config.mjs
 tsconfig.json
+styles/confirmly-popup-bk.css
 
 # Test files
 __tests__/

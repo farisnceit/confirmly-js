@@ -2,10 +2,10 @@ import { createPopper } from '@popperjs/core';
 
 var ConfirmPopup = /** @class */ (function () {
     function ConfirmPopup(_a) {
-        var template = _a.template, _b = _a.buttonClasses, buttonClasses = _b === void 0 ? {
+        var template = _a.template, _b = _a.buttonClasses, buttonClasses = _b === undefined ? {
             confirm: 'confirmly__button confirmly__button--confirm',
             cancel: 'confirmly__button confirmly__button--cancel',
-        } : _b, _c = _a.buttonContents, buttonContents = _c === void 0 ? { confirm: 'Yes', cancel: 'No' } : _c, _d = _a.defaultPlacement, defaultPlacement = _d === void 0 ? 'top' : _d, targetElement = _a.targetElement, onConfirm = _a.onConfirm, onCancel = _a.onCancel, _e = _a.showError, showError = _e === void 0 ? true : _e;
+        } : _b, _c = _a.buttonContents, buttonContents = _c === undefined ? { confirm: 'Yes', cancel: 'No' } : _c, _d = _a.defaultPlacement, defaultPlacement = _d === undefined ? 'top' : _d, targetElement = _a.targetElement, onConfirm = _a.onConfirm, onCancel = _a.onCancel, _e = _a.showError, showError = _e === undefined ? true : _e;
         this.popperInstance = null;
         this.template = template || this.defaultTemplate();
         this.buttonClasses = buttonClasses;
@@ -55,7 +55,7 @@ var ConfirmPopup = /** @class */ (function () {
         }
         this.onConfirmCallback = onConfirm;
         this.onCancelCallback = onCancel;
-        element === null || element === void 0 ? void 0 : element.addEventListener('click', function (event) {
+        element === null || element === undefined ? undefined : element.addEventListener('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
             _this.showPopper(element);
@@ -135,12 +135,12 @@ var ConfirmPopup = /** @class */ (function () {
     };
     ConfirmPopup.prototype.handleConfirm = function () {
         var _a;
-        (_a = this.onConfirmCallback) === null || _a === void 0 ? void 0 : _a.call(this);
+        (_a = this.onConfirmCallback) === null || _a === undefined ? undefined : _a.call(this);
         this.hidePopper();
     };
     ConfirmPopup.prototype.handleCancel = function () {
         var _a;
-        (_a = this.onCancelCallback) === null || _a === void 0 ? void 0 : _a.call(this);
+        (_a = this.onCancelCallback) === null || _a === undefined ? undefined : _a.call(this);
         this.hidePopper();
     };
     return ConfirmPopup;
