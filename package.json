@@ -1,5 +1,5 @@
 {
-  "name": "confirmly-popup",
+  "name": "confirmly-popup.js",
   "version": "1.2.0",
   "type": "module",
   "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",

@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmly Popup Examples</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="../dist/confirmly-popup.umd.js"></script>
+    <link rel="stylesheet" href="../styles/confirmly-popup.css" />
+    <link rel="stylesheet" href="./themes.css" />
+    <link rel="stylesheet" href="./sidebar.css" />
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+      }
+
+      .main-heading {
+        font-family: 'DM Sans', sans-serif;
+      }
+
+      .code-block {
+        background-color: #f8f9fa;
+        border-radius: 6px;
+        padding: 16px;
+        overflow-x: auto;
+        font-family: monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #24292e;
+        border: 1px solid #e1e4e8;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-gray-50">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <svg
+            class="h-8 w-8"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h1 class="sidebar-title">Confirmly</h1>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Documentation</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./index.html" class="sidebar-nav-link">Home</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./examples.html" class="sidebar-nav-link">Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./api.html" class="sidebar-nav-link">API Reference</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Getting Started</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./index.html#installation" class="sidebar-nav-link">Installation</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./index.html#basic-usage" class="sidebar-nav-link">Basic Usage</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Examples</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="#theme-examples" class="sidebar-nav-link">Theme Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="#placement-examples" class="sidebar-nav-link">Placement Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="#custom-examples" class="sidebar-nav-link">Custom Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="#code-examples" class="sidebar-nav-link">Code Examples</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">API Reference</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./api.html#constructor-options" class="sidebar-nav-link">Constructor Options</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./api.html#methods" class="sidebar-nav-link">Methods</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./api.html#css-variables" class="sidebar-nav-link">CSS Variables</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Resources</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="https://github.com/fariz-plugins/confirmly-js" class="sidebar-nav-link" target="_blank">GitHub</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="https://www.npmjs.com/package/confirmly-popup" class="sidebar-nav-link" target="_blank">NPM Package</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- Mobile sidebar toggle button -->
+    <button class="sidebar-toggle">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    
+    <!-- Main content with sidebar margin -->
+    <div class="with-sidebar">
+    <div
+      class="bg-white/80 backdrop-blur-lg shadow-sm border-b sticky top-0 z-50"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center space-x-3">
+            <svg
+              class="h-8 w-8 text-blue-600"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span class="text-xl font-bold text-gray-900">Confirmly</span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a href="./index.html" class="text-gray-600 hover:text-gray-900">
+              Home
+            </a>
+            <a href="./examples.html" class="text-blue-600 font-medium">
+              Examples
+            </a>
+            <a
+              href="https://github.com/fariz-plugins/confirmly-js"
+              class="text-gray-600 hover:text-gray-900"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <header class="text-center mb-16">
+        <h1
+          class="text-4xl font-bold text-gray-900 mb-6 main-heading tracking-tight"
+        >
+          Confirmly Popup Examples
+        </h1>
+        <p class="text-xl text-gray-600 mb-12">
+          Explore all the features and customization options
+        </p>
+      </header>
+
+      <!-- Theme Examples Section -->
+      <section id="theme-examples" class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 border-b pb-2">Theme Examples</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Default Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Default Theme</h3>
+            <p class="text-gray-600 mb-4">The standard styling for the popup</p>
+            <button
+              id="defaultThemeButton"
+              class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+            >
+              Show Default
+            </button>
+          </div>
+
+          <!-- Success Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Success Theme</h3>
+            <p class="text-gray-600 mb-4">Green styling for success actions</p>
+            <button
+              id="successThemeButton"
+              class="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500"
+            >
+              Show Success
+            </button>
+          </div>
+
+          <!-- Warning Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Warning Theme</h3>
+            <p class="text-gray-600 mb-4">Red styling for dangerous actions</p>
+            <button
+              id="warningThemeButton"
+              class="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500"
+            >
+              Show Warning
+            </button>
+          </div>
+
+          <!-- Info Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Info Theme</h3>
+            <p class="text-gray-600 mb-4">Blue styling for informational popups</p>
+            <button
+              id="infoThemeButton"
+              class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              Show Info
+            </button>
+          </div>
+
+          <!-- Dark Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Dark Theme</h3>
+            <p class="text-gray-600 mb-4">Dark mode styling for the popup</p>
+            <button
+              id="darkThemeButton"
+              class="inline-flex items-center rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-700"
+            >
+              Show Dark
+            </button>
+          </div>
+
+          <!-- Material Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Material Design</h3>
+            <p class="text-gray-600 mb-4">Material design inspired styling</p>
+            <button
+              id="materialThemeButton"
+              class="inline-flex items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500"
+            >
+              Show Material
+            </button>
+          </div>
+
+          <!-- Bootstrap Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Bootstrap Style</h3>
+            <p class="text-gray-600 mb-4">Bootstrap inspired styling</p>
+            <button
+              id="bootstrapThemeButton"
+              class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              Show Bootstrap
+            </button>
+          </div>
+
+          <!-- Rounded Theme -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Rounded Style</h3>
+            <p class="text-gray-600 mb-4">Extra rounded corners styling</p>
+            <button
+              id="roundedThemeButton"
+              class="inline-flex items-center rounded-full bg-pink-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-500"
+            >
+              Show Rounded
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Placement Examples Section -->
+      <section id="placement-examples" class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 border-b pb-2">Placement Examples</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Top Placement -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Top Placement</h3>
+            <p class="text-gray-600 mb-4">Popup appears above the button</p>
+            <button
+              id="topPlacementButton"
+              class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              Show Top
+            </button>
+          </div>
+
+          <!-- Right Placement -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Right Placement</h3>
+            <p class="text-gray-600 mb-4">Popup appears to the right</p>
+            <button
+              id="rightPlacementButton"
+              class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              Show Right
+            </button>
+          </div>
+
+          <!-- Bottom Placement -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Bottom Placement</h3>
+            <p class="text-gray-600 mb-4">Popup appears below the button</p>
+            <button
+              id="bottomPlacementButton"
+              class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              Show Bottom
+            </button>
+          </div>
+
+          <!-- Left Placement -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Left Placement</h3>
+            <p class="text-gray-600 mb-4">Popup appears to the left</p>
+            <button
+              id="leftPlacementButton"
+              class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              Show Left
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Custom Examples Section -->
+      <section id="custom-examples" class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 border-b pb-2">Custom Examples</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Custom Button Text -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Custom Button Text</h3>
+            <p class="text-gray-600 mb-4">Customize the button labels</p>
+            <button
+              id="customButtonTextButton"
+              class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+            >
+              Custom Buttons
+            </button>
+          </div>
+
+          <!-- Custom Template -->
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-lg font-medium mb-3">Custom Template</h3>
+            <p class="text-gray-600 mb-4">Fully customized popup with HTML</p>
+            <button
+              id="customTemplateButton"
+              class="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500"
+            >
+              Custom Template
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Examples Section -->
+      <section id="code-examples" class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6 border-b pb-2">Code Examples</h2>
+        
+        <!-- Basic Usage Example -->
+        <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+          <h3 class="text-lg font-medium mb-3">Basic Usage</h3>
+          <div class="code-block mb-4">
+            <pre><code>import { ConfirmPopup } from 'confirmly-popup';
+
+const popup = new ConfirmPopup({
+  targetElement: document.querySelector('#myButton'),
+  onConfirm: () => {
+    console.log('Confirmed!');
+  },
+  onCancel: () => {
+    console.log('Cancelled!');
+  },
+});</code></pre>
+          </div>
+        </div>
+
+        <!-- Advanced Usage Example -->
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <h3 class="text-lg font-medium mb-3">Advanced Usage</h3>
+          <div class="code-block">
+            <pre><code>const popup = new ConfirmPopup({
+  targetElement: document.querySelector('#myButton'),
+  template: `
+    &lt;div class="confirmly__popup confirmly__popup--custom"&gt;
+      &lt;div class="confirmly__content"&gt;
+        &lt;p class="confirmly__message"&gt;Are you really sure?&lt;/p&gt;
+        &lt;div class="confirmly__buttons"&gt;
+          &lt;button data-button="confirm"&gt;Yes, proceed&lt;/button&gt;
+          &lt;button data-button="cancel"&gt;No, go back&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="confirmly__arrow" data-popper-arrow&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  `,
+  buttonClasses: {
+    confirm: 'btn btn-primary',
+    cancel: 'btn btn-secondary',
+  },
+  buttonContents: {
+    confirm: 'Yes, proceed',
+    cancel: 'No, go back',
+  },
+  defaultPlacement: 'top',
+  showError: true,
+  onConfirm: () => {
+    console.log('Action confirmed');
+  },
+  onCancel: () => {
+    console.log('Action cancelled');
+  },
+});</code></pre>
+          </div>
+        </div>
+      </section>
+    </div>
+    </div>
+
+    <script src="./sidebar.js"></script>
+    <script>
+      // Default Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('defaultThemeButton'),
+        onConfirm: () => {
+          console.log('Default action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Default action cancelled!');
+        },
+      });
+
+      // Success Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('successThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--success">
+            <div class="confirmly__content">
+              <p class="confirmly__message">✓ Operation completed successfully!</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Cancel</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Continue</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Success action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Success action cancelled!');
+        },
+      });
+
+      // Warning Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('warningThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--warning">
+            <div class="confirmly__content">
+              <p class="confirmly__message">⚠️ Warning: This action cannot be undone!</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Cancel</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Yes, proceed</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Warning action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Warning action cancelled!');
+        },
+      });
+
+      // Info Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('infoThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--info">
+            <div class="confirmly__content">
+              <p class="confirmly__message">ℹ️ This will update your preferences</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Not now</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Update</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Info action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Info action cancelled!');
+        },
+      });
+
+      // Dark Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('darkThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--dark">
+            <div class="confirmly__content">
+              <p class="confirmly__message">Would you like to enable dark mode?</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">No</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Yes</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Dark theme action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Dark theme action cancelled!');
+        },
+      });
+
+      // Material Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('materialThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--material">
+            <div class="confirmly__content">
+              <p class="confirmly__message">Would you like to save your changes?</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">CANCEL</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">SAVE</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Material theme action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Material theme action cancelled!');
+        },
+      });
+
+      // Bootstrap Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('bootstrapThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--bootstrap">
+            <div class="confirmly__content">
+              <p class="confirmly__message">Are you sure you want to proceed?</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Cancel</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Confirm</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Bootstrap theme action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Bootstrap theme action cancelled!');
+        },
+      });
+
+      // Rounded Theme Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('roundedThemeButton'),
+        template: `
+          <div class="confirmly__popup confirmly__popup--rounded">
+            <div class="confirmly__content">
+              <p class="confirmly__message">Would you like to subscribe?</p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">No thanks</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Subscribe</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Rounded theme action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Rounded theme action cancelled!');
+        },
+      });
+
+      // Placement Examples
+      ['top', 'right', 'bottom', 'left'].forEach((placement) => {
+        new confirmly.ConfirmPopup({
+          targetElement: document.getElementById(`${placement}PlacementButton`),
+          defaultPlacement: placement,
+          onConfirm: () => {
+            console.log(`${placement} placement action confirmed!`);
+          },
+          onCancel: () => {
+            console.log(`${placement} placement action cancelled!`);
+          },
+        });
+      });
+
+      // Custom Button Text Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('customButtonTextButton'),
+        buttonContents: {
+          confirm: 'Absolutely',
+          cancel: 'No way',
+        },
+        onConfirm: () => {
+          console.log('Custom button text action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Custom button text action cancelled!');
+        },
+      });
+
+      // Custom Template Example
+      new confirmly.ConfirmPopup({
+        targetElement: document.getElementById('customTemplateButton'),
+        template: `
+          <div class="confirmly__popup" style="--confirmly-primary-bg: #22c55e; --confirmly-primary-hover: #16a34a;">
+            <div class="confirmly__content">
+              <p class="confirmly__message">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Would you like to save these changes?
+                </span>
+              </p>
+              <div class="confirmly__buttons">
+                <button data-button="cancel" class="confirmly__button confirmly__button--cancel">Discard</button>
+                <button data-button="confirm" class="confirmly__button confirmly__button--confirm">Save Changes</button>
+              </div>
+            </div>
+            <div class="confirmly__arrow" data-popper-arrow></div>
+          </div>
+        `,
+        onConfirm: () => {
+          console.log('Custom template action confirmed!');
+        },
+        onCancel: () => {
+          console.log('Custom template action cancelled!');
+        },
+      });
+    </script>
+  </body>
+</html>

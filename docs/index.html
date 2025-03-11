@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="../dist/confirmly-popup.umd.js"></script>
     <link rel="stylesheet" href="../styles/confirmly-popup.css" />
+    <link rel="stylesheet" href="./sidebar.css" />
     <style>
       /* https://gradienty.codes/mesh-gradients */
       .bg-image-nature {
@@ -38,6 +39,109 @@
   </head>
 
   <body class="min-h-screen bg-gray-50">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <svg
+            class="h-8 w-8"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h1 class="sidebar-title">Confirmly</h1>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Documentation</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./index.html" class="sidebar-nav-link">Home</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./examples.html" class="sidebar-nav-link">Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./api.html" class="sidebar-nav-link">API Reference</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Getting Started</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./index.html#installation" class="sidebar-nav-link">Installation</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./index.html#basic-usage" class="sidebar-nav-link">Basic Usage</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Examples</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./examples.html#theme-examples" class="sidebar-nav-link">Theme Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./examples.html#placement-examples" class="sidebar-nav-link">Placement Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./examples.html#custom-examples" class="sidebar-nav-link">Custom Examples</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./examples.html#code-examples" class="sidebar-nav-link">Code Examples</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">API Reference</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="./api.html#constructor-options" class="sidebar-nav-link">Constructor Options</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./api.html#methods" class="sidebar-nav-link">Methods</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./api.html#css-variables" class="sidebar-nav-link">CSS Variables</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <nav class="sidebar-nav">
+        <h2 class="sidebar-nav-title">Resources</h2>
+        <ul class="sidebar-nav-items">
+          <li class="sidebar-nav-item">
+            <a href="https://github.com/fariz-plugins/confirmly-js" class="sidebar-nav-link" target="_blank">GitHub</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="https://www.npmjs.com/package/confirmly-popup" class="sidebar-nav-link" target="_blank">NPM Package</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- Mobile sidebar toggle button -->
+    <button class="sidebar-toggle">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    
+    <!-- Main content with sidebar margin -->
+    <div class="with-sidebar">
     <div
       class="bg-white/80 backdrop-blur-lg shadow-sm border-b sticky top-0 z-50"
     >
@@ -60,6 +164,15 @@
             <span class="text-xl font-bold text-gray-900">Confirmly</span>
           </div>
           <div class="flex items-center space-x-4">
+            <a href="./index.html" class="text-blue-600 font-medium">
+              Home
+            </a>
+            <a href="./examples.html" class="text-gray-600 hover:text-gray-900">
+              Examples
+            </a>
+            <a href="./api.html" class="text-gray-600 hover:text-gray-900">
+              API
+            </a>
             <a
               href="https://github.com/fariz-plugins/confirmly-js"
               class="text-gray-600 hover:text-gray-900"
@@ -278,7 +391,9 @@
         </div>
       </div>
     </div>
+    </div>
 
+    <script src="./sidebar.js"></script>
     <script>
       // Basic Example
       new confirmly.ConfirmPopup({
