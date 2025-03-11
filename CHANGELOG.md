@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] - 2024-03-11
+
+### Added
+
+- SASS support for better styling organization
+- Theme customization through CSS variables
+- Husky integration for pre-commit hooks
+- Lint-staged for automated code formatting
+
+### Changed
+
+- Updated ESLint configuration with latest plugins and rules
+- Improved build configuration with Rollup
+- Enhanced TypeScript configuration
+- Updated all development dependencies to latest versions
+
+### Fixed
+
+- Build process optimization
+- Code formatting consistency
+
+## [1.3.4] - 2024-03-11
+
+### Changed
+
+feat: update README to reflect package rename and add live demo link
+
+## [1.3.0] - 2024-03-11
+
+### Changed
+
+Working on eslint Config by @farisnceit in #10
+ci: add GitHub Actions workflow for PR validation by @farisnceit in #11
+ci: add Dependabot configuration for automated version updates by @farisnceit in #12
+feat: rename package and sidebar enhance by @farisnceit in #13
+
 ## [1.2.0] - 2025-10-25
 
 ### Changed
