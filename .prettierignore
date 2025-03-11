@@ -1,3 +1,11 @@
 node_modules/
 dist/
 build/
+.next/
+*.min.css
+*.min.js
+coverage/
+.cache/
+public/
+*.log
+.DS_Store
