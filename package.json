@@ -75,5 +75,5 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }  
+  }
 }
