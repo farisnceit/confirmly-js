@@ -24,3 +24,5 @@ docs/
 
 # Development dependencies
 node_modules/ 
+.vcode/
+.husky/
