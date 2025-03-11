@@ -8,7 +8,9 @@ src/
 .editorconfig
 .gitignore
 .npmignore
-rollup.config.js
+.prettierignore
+eslint.config.mjs
+rollup.config.mjs
 tsconfig.json
 
 # Test files
