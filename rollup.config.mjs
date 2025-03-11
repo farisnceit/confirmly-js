@@ -1,7 +1,6 @@
 import terser from '@rollup/plugin-terser';
-import babel from '@rollup/plugin-babel';
-import eslint from '@rollup/plugin-eslint';
 import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript'; // Use this for TypeScript
 
 export default {
   input: 'src/confirmlyPopup.ts',
@@ -43,18 +42,5 @@ export default {
     },
   ],
   external: ['@popperjs/core'], // External dependency that shouldn't be bundled
-  plugins: [
-    eslint({
-      fix: true,
-      overrideConfigFile: './eslint.config.mjs',
-    }),
-    babel({
-      babelHelpers: 'bundled',
-      presets: [
-        '@babel/preset-env', // Transpile to ES5/ES6 as needed
-        '@babel/preset-typescript', // Handle TypeScript files
-      ],
-    }),
-    commonjs(),
-  ],
+  plugins: [typescript(), commonjs()],
 };

@@ -38,19 +38,15 @@
     "lint:check": "eslint .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "prepublish": "npm run lint:check && npm run format:check && npm run build"
+    "prepublish": "npm run format && npm run lint:check && npm run format:check && npm run build"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.25.9",
-    "@babel/preset-env": "^7.26.0",
-    "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.22.0",
     "@popperjs/core": "^2.11.8",
-    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
-    "@rollup/plugin-eslint": "^9.0.5",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "eslint": "^9.22.0",
