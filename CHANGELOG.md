@@ -5,7 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.2] - 2025-10-15
+## [1.2.0] - 2025-10-25
+
+### Changed
+
+- Removed unnecessary `globals` for ESM builds as they rely on `import` statements.
+- Updated Rollup config to maintain compatibility with both UMD/IIFE and ESM formats.
+- Removed Babel from Rollup configuration.
+- Changed configuration of ESLint.
+- Removed ESLint from build process.
+
+### Chore
+
+- Updated ESLint config to use traditional format.
+- Added .npmignore for better package control.
+- Updated formatting and linting rules.
+- Fixed build configuration.
+
+## [1.1.2] - 2025-03-10
+
+### Added
+
+-
+
+### Changed
+
+- Improved Demo Page & styles
+- Updated documentation with new examples
+
+### Fixed
+
+## [1.1.1] - 2025-03-10
 
 ### Added
 
@@ -14,14 +44,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated dependencies to latest versions
-- Improved mobile responsiveness
+- Added project documentation files (CHANGELOG.md, CONTRIBUTING.md)
+- Removed unnecessary comments in animation code
+- Cleaned up HTML formatting in example/index.html
+- Renamed CSS file from confirmation-popper.css to confirmly-popup.css
 
 ### Fixed
 
-- Fixed issue with popup not closing on outside click
+- Fixed incorrect CSS class in template (changed {{confirmClass}} to {{cancelClass}} for cancel button)
 
-## [1.0.0] - 2024-03-14
+## [1.0.0] - 2025-03-09
 
 ### Added
 
