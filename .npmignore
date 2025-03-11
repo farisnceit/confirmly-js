@@ -1,0 +1,26 @@
+# Source files (not needed in npm package)
+src/
+.github/
+
+# Development files
+.eslintrc
+.prettierrc
+.editorconfig
+.gitignore
+.npmignore
+rollup.config.js
+tsconfig.json
+
+# Test files
+__tests__/
+*.test.*
+*.spec.*
+
+# Documentation
+docs/
+*.md
+!README.md
+!LICENSE
+
+# Development dependencies
+node_modules/ 
