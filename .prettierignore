@@ -9,3 +9,4 @@ coverage/
 public/
 *.log
 .DS_Store
+styles/confirmly-popup.css
