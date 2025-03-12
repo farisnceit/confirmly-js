@@ -1,21 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://farisnceit.github.io/confirmly-js/</loc>
-    <lastmod>2024-01-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://farisnceit.github.io/confirmly-js/api.html</loc>
-    <lastmod>2024-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://farisnceit.github.io/confirmly-js/examples.html</loc>
-    <lastmod>2024-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<link type="text/css" rel="stylesheet" id="dark-mode-custom-link"/>
+<link type="text/css" rel="stylesheet" id="dark-mode-general-link"/>
+<style lang="en" type="text/css" id="dark-mode-custom-style"/>
+<style lang="en" type="text/css" id="dark-mode-native-style"/>
+
+<url>
+<loc>https://farisnceit.github.io/confirmly-js/</loc>
+<priority>1.00</priority>
+</url>
+<url>
+<loc>https://farisnceit.github.io/confirmly-js/index.html</loc>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://farisnceit.github.io/confirmly-js/examples.html</loc>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://farisnceit.github.io/confirmly-js/api.html</loc>
+<priority>0.80</priority>
+</url>
 </urlset>
