@@ -5,7 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.2] - 2024-03-11
+## [1.5.0] - 2025-03-12
+
+### Added
+
+- Comprehensive documentation with usage examples
+- Repository metadata and project information
+- Advanced theming system with SASS variables
+- Custom event handlers for popup interactions
+
+### Changed
+
+### Fixed
+
+-
+
+## [1.4.3] - 2025-03-11
+
+### Added
+
+- Additional usage examples in documentation
+- New theme variables for better customization
+
+### Changed
+
+- Optimized SASS implementation
+- Improved build process efficiency
+
+### Fixed
+
+- Minor styling inconsistencies
+- Documentation formatting issues
+
+## [1.4.2] - 2025-03-11
 
 ### Added
 
@@ -26,13 +58,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Build process optimization
 - Code formatting consistency
 
-## [1.3.4] - 2024-03-11
+## [1.3.4] - 2025-03-11
 
 ### Changed
 
 feat: update README to reflect package rename and add live demo link
 
-## [1.3.0] - 2024-03-11
+## [1.3.0] - 2025-03-11
 
 ### Changed
 
