@@ -1,8 +1,14 @@
 {
   "name": "confirmly-popup.js",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "type": "module",
   "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farisnceit/confirmly-js.git"
+  },
+  "homepage": "https://farisnceit.github.io/confirmly-js/",
+  "license": "MIT",
   "keywords": [
     "confirmation",
     "popup",
