@@ -1,14 +1,18 @@
 import {
-  createPopper,
-  Instance as PopperInstance,
+  computePosition,
+  autoUpdate,
+  offset,
+  arrow,
+  shift,
   Placement,
-} from '@popperjs/core';
+  Middleware,
+} from '@floating-ui/dom';
 import { PopperOptions } from './constants';
 
 import '../styles/confirmly-popup.scss';
 
 export class ConfirmPopup {
-  private popperInstance: PopperInstance | null = null;
+  private cleanup: (() => void) | null = null;
   private readonly template: string;
   private readonly buttonClasses: { confirm: string; cancel: string };
   private readonly buttonContents: { confirm: string; cancel: string };
@@ -116,9 +120,9 @@ export class ConfirmPopup {
   }
 
   public destroy(): void {
-    if (this.popperInstance) {
-      this.popperInstance.destroy();
-      this.popperInstance = null;
+    if (this.cleanup) {
+      this.cleanup();
+      this.cleanup = null;
     }
     this.popperElement.remove();
     document.removeEventListener('click', this.handleOutsideClick.bind(this));
@@ -147,35 +151,42 @@ export class ConfirmPopup {
       });
     }
 
-    if (this.popperInstance) {
-      this.popperInstance.destroy();
-    }
+    const arrowElement = this.popperElement.querySelector<HTMLElement>(
+      '[data-popper-arrow]',
+    );
+    const middleware: Middleware[] = [
+      offset(8),
+      shift({ padding: 8 }),
+      ...(arrowElement ? [arrow({ element: arrowElement, padding: 8 })] : []),
+    ];
 
-    this.popperInstance = createPopper(targetElement, this.popperElement, {
-      placement: this.defaultPlacement,
-      modifiers: [
+    const update = async () => {
+      const { x, y, middlewareData } = await computePosition(
+        targetElement,
+        this.popperElement,
         {
-          name: 'offset',
-          options: {
-            offset: [0, 8],
-          },
+          placement: this.defaultPlacement as Placement,
+          middleware,
         },
-        {
-          name: 'arrow',
-          options: {
-            element: '[data-popper-arrow]',
-            padding: 8,
-          },
-        },
-        {
-          name: 'preventOverflow',
-          options: {
-            padding: 8,
-            boundary: 'viewport',
-          },
-        },
-      ],
-    });
+      );
+
+      this.popperElement.style.left = `${x}px`;
+      this.popperElement.style.top = `${y}px`;
+        
+
+      if (arrowElement && middlewareData.arrow) {
+        const { x: arrowX, y: arrowY } = middlewareData.arrow;
+        const arrowStyles = {
+          left: arrowX != null ? `${arrowX}px` : '',
+          top: arrowY != null ? `${arrowY}px` : '',
+        };
+(arrowElement).style.left = arrowStyles.left;
+(arrowElement).style.top = arrowStyles.top;
+         
+      }
+    };
+
+    this.cleanup = autoUpdate(targetElement, this.popperElement, update);
   }
 
   private hidePopper(): void {
@@ -184,10 +195,6 @@ export class ConfirmPopup {
     if (popup) {
       popup.classList.remove('confirmly__popup--visible');
       setTimeout(() => {
-        if (this.popperInstance) {
-          this.popperInstance.destroy();
-          this.popperInstance = null;
-        }
         this.popperElement.style.display = 'none';
       }, 200);
     }

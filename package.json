@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
-    "@popperjs/core": "^2.11.8",
+    "@floating-ui/dom": "^1.6.3",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",

@@ -16,7 +16,7 @@ export default {
       format: 'iife',
       name: 'confirmly',
       globals: {
-        '@popperjs/core': 'Popper',
+        '@floating-ui/dom': 'FloatingUIDOM',
       },
       sourcemap: true,
       plugins: [],
@@ -26,7 +26,7 @@ export default {
       format: 'iife',
       name: 'confirmly',
       globals: {
-        '@popperjs/core': 'Popper',
+        '@floating-ui/dom': 'FloatingUI',
       },
       sourcemap: true,
       plugins: [terser()],
@@ -46,7 +46,7 @@ export default {
       plugins: [terser()],
     },
   ],
-  external: ['@popperjs/core'], // External dependency that shouldn't be bundled
+  external: ['@floating-ui/dom'], // External dependency that shouldn't be bundled
   plugins: [
     typescript(),
     commonjs(),

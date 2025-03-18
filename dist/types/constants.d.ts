@@ -1,4 +1,4 @@
-import Popper from '@popperjs/core';
+import { Placement } from '@floating-ui/dom';
 export interface PopperOptions {
     template?: string;
     buttonClasses?: {
@@ -9,7 +9,7 @@ export interface PopperOptions {
         confirm: string;
         cancel: string;
     };
-    defaultPlacement?: Popper.Placement;
+    defaultPlacement?: Placement;
     targetElement: HTMLElement;
     onConfirm?: () => void;
     onCancel?: () => void;

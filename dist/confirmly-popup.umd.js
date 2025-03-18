@@ -1,13 +1,44 @@
-var confirmly = (function (exports, core) {
+var confirmly = (function (exports, dom) {
     'use strict';
 
-    var ConfirmPopup = /** @class */ (function () {
-        function ConfirmPopup(_a) {
-            var template = _a.template, _b = _a.buttonClasses, buttonClasses = _b === undefined ? {
-                confirm: 'confirmly__button confirmly__button--confirm',
-                cancel: 'confirmly__button confirmly__button--cancel',
-            } : _b, _c = _a.buttonContents, buttonContents = _c === undefined ? { confirm: 'Yes', cancel: 'No' } : _c, _d = _a.defaultPlacement, defaultPlacement = _d === undefined ? 'top' : _d, targetElement = _a.targetElement, onConfirm = _a.onConfirm, onCancel = _a.onCancel, _e = _a.showError, showError = _e === undefined ? true : _e;
-            this.popperInstance = null;
+    /******************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+    /* global Reflect, Promise, SuppressedError, Symbol, Iterator */
+
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+        var e = new Error(message);
+        return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+    };
+
+    class ConfirmPopup {
+        constructor({ template, buttonClasses = {
+            confirm: 'confirmly__button confirmly__button--confirm',
+            cancel: 'confirmly__button confirmly__button--cancel',
+        }, buttonContents = { confirm: 'Yes', cancel: 'No' }, defaultPlacement = 'top', targetElement, onConfirm, onCancel, showError = true, }) {
+            this.cleanup = null;
             this.template = template || this.defaultTemplate();
             this.buttonClasses = buttonClasses;
             this.buttonContents = buttonContents;
@@ -22,14 +53,25 @@ var confirmly = (function (exports, core) {
                 console.error('Target Element is not defined');
             }
         }
-        ConfirmPopup.prototype.defaultTemplate = function () {
-            return "\n      <div class=\"confirmly__popup\">\n        <div class=\"confirmly__content\">\n          <p class=\"confirmly__message\">Are you sure?</p>\n          <div class=\"confirmly__buttons\">\n            <button class=\"{{cancelClass}}\" data-button=\"cancel\">{{cancelContent}}</button>\n            <button class=\"{{confirmClass}}\" data-button=\"confirm\">{{confirmContent}}</button>\n          </div>\n        </div>\n        <div class=\"confirmly__arrow\" data-popper-arrow></div>\n      </div>\n    ";
-        };
-        ConfirmPopup.prototype.createPopperElement = function () {
-            var popperDiv = document.createElement('div');
+        defaultTemplate() {
+            return `
+      <div class="confirmly__popup">
+        <div class="confirmly__content">
+          <p class="confirmly__message">Are you sure?</p>
+          <div class="confirmly__buttons">
+            <button class="{{cancelClass}}" data-button="cancel">{{cancelContent}}</button>
+            <button class="{{confirmClass}}" data-button="confirm">{{confirmContent}}</button>
+          </div>
+        </div>
+        <div class="confirmly__arrow" data-popper-arrow></div>
+      </div>
+    `;
+        }
+        createPopperElement() {
+            const popperDiv = document.createElement('div');
             popperDiv.className = 'confirmly';
             popperDiv.style.display = 'none';
-            var template = this.template
+            const template = this.template
                 .replace('{{confirmClass}}', this.buttonClasses.confirm)
                 .replace('{{cancelClass}}', this.buttonClasses.cancel)
                 .replace('{{confirmContent}}', this.buttonContents.confirm)
@@ -37,119 +79,108 @@ var confirmly = (function (exports, core) {
             popperDiv.innerHTML = template;
             this.attachButtonListeners(popperDiv);
             return popperDiv;
-        };
-        ConfirmPopup.prototype.attachButtonListeners = function (popperDiv) {
-            var confirmButton = popperDiv.querySelector('[data-button="confirm"]');
-            var cancelButton = popperDiv.querySelector('[data-button="cancel"]');
+        }
+        attachButtonListeners(popperDiv) {
+            const confirmButton = popperDiv.querySelector('[data-button="confirm"]');
+            const cancelButton = popperDiv.querySelector('[data-button="cancel"]');
             if (confirmButton) {
                 confirmButton.addEventListener('click', this.handleConfirm.bind(this));
             }
             if (cancelButton) {
                 cancelButton.addEventListener('click', this.handleCancel.bind(this));
             }
-        };
-        ConfirmPopup.prototype.attach = function (element, onConfirm, onCancel) {
-            var _this = this;
+        }
+        attach(element, onConfirm, onCancel) {
             if (!element && this.showError) {
                 console.error('Target Element is not defined');
                 return;
             }
             this.onConfirmCallback = onConfirm;
             this.onCancelCallback = onCancel;
-            element === null || element === undefined ? undefined : element.addEventListener('click', function (event) {
+            element === null || element === undefined ? undefined : element.addEventListener('click', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                _this.showPopper(element);
+                this.showPopper(element);
             });
             document.addEventListener('click', this.handleOutsideClick.bind(this));
             document.addEventListener('keydown', this.handleEscapeKey.bind(this));
-        };
-        ConfirmPopup.prototype.destroy = function () {
-            if (this.popperInstance) {
-                this.popperInstance.destroy();
-                this.popperInstance = null;
+        }
+        destroy() {
+            if (this.cleanup) {
+                this.cleanup();
+                this.cleanup = null;
             }
             this.popperElement.remove();
             document.removeEventListener('click', this.handleOutsideClick.bind(this));
             document.removeEventListener('keydown', this.handleEscapeKey.bind(this));
-        };
-        ConfirmPopup.prototype.handleOutsideClick = function (event) {
+        }
+        handleOutsideClick(event) {
             if (!this.popperElement.contains(event.target)) {
                 this.hidePopper();
             }
-        };
-        ConfirmPopup.prototype.handleEscapeKey = function (event) {
+        }
+        handleEscapeKey(event) {
             if (event.key === 'Escape') {
                 this.hidePopper();
             }
-        };
-        ConfirmPopup.prototype.showPopper = function (targetElement) {
+        }
+        showPopper(targetElement) {
             this.popperElement.style.display = 'block';
-            var popup = this.popperElement.querySelector('.confirmly__popup');
+            const popup = this.popperElement.querySelector('.confirmly__popup');
             if (popup) {
-                requestAnimationFrame(function () {
+                requestAnimationFrame(() => {
                     popup.classList.add('confirmly__popup--visible');
                 });
             }
-            if (this.popperInstance) {
-                this.popperInstance.destroy();
-            }
-            this.popperInstance = core.createPopper(targetElement, this.popperElement, {
-                placement: this.defaultPlacement,
-                modifiers: [
-                    {
-                        name: 'offset',
-                        options: {
-                            offset: [0, 8],
-                        },
-                    },
-                    {
-                        name: 'arrow',
-                        options: {
-                            element: '[data-popper-arrow]',
-                            padding: 8,
-                        },
-                    },
-                    {
-                        name: 'preventOverflow',
-                        options: {
-                            padding: 8,
-                            boundary: 'viewport',
-                        },
-                    },
-                ],
+            const arrowElement = this.popperElement.querySelector('[data-popper-arrow]');
+            const middleware = [
+                dom.offset(8),
+                dom.shift({ padding: 8 }),
+                ...(arrowElement ? [dom.arrow({ element: arrowElement, padding: 8 })] : []),
+            ];
+            const update = () => __awaiter(this, undefined, undefined, function* () {
+                const { x, y, middlewareData } = yield dom.computePosition(targetElement, this.popperElement, {
+                    placement: this.defaultPlacement,
+                    middleware,
+                });
+                this.popperElement.style.left = `${x}px`;
+                this.popperElement.style.top = `${y}px`;
+                if (arrowElement && middlewareData.arrow) {
+                    const { x: arrowX, y: arrowY } = middlewareData.arrow;
+                    const arrowStyles = {
+                        left: arrowX != null ? `${arrowX}px` : '',
+                        top: arrowY != null ? `${arrowY}px` : '',
+                    };
+                    (arrowElement).style.left = arrowStyles.left;
+                    (arrowElement).style.top = arrowStyles.top;
+                }
             });
-        };
-        ConfirmPopup.prototype.hidePopper = function () {
-            var _this = this;
-            var popup = this.popperElement.querySelector('.confirmly__popup');
+            this.cleanup = dom.autoUpdate(targetElement, this.popperElement, update);
+        }
+        hidePopper() {
+            const popup = this.popperElement.querySelector('.confirmly__popup');
             if (popup) {
                 popup.classList.remove('confirmly__popup--visible');
-                setTimeout(function () {
-                    if (_this.popperInstance) {
-                        _this.popperInstance.destroy();
-                        _this.popperInstance = null;
-                    }
-                    _this.popperElement.style.display = 'none';
+                setTimeout(() => {
+                    this.popperElement.style.display = 'none';
                 }, 200);
             }
-        };
-        ConfirmPopup.prototype.handleConfirm = function () {
+        }
+        handleConfirm() {
             var _a;
             (_a = this.onConfirmCallback) === null || _a === undefined ? undefined : _a.call(this);
             this.hidePopper();
-        };
-        ConfirmPopup.prototype.handleCancel = function () {
+        }
+        handleCancel() {
             var _a;
             (_a = this.onCancelCallback) === null || _a === undefined ? undefined : _a.call(this);
             this.hidePopper();
-        };
-        return ConfirmPopup;
-    }());
+        }
+    }
 
     exports.ConfirmPopup = ConfirmPopup;
 
     return exports;
 
-})({}, Popper);
+})({}, FloatingUIDOM);
 //# sourceMappingURL=confirmly-popup.umd.js.map
