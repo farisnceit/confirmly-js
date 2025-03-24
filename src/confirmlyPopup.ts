@@ -172,7 +172,6 @@ export class ConfirmPopup {
 
       this.popperElement.style.left = `${x}px`;
       this.popperElement.style.top = `${y}px`;
-        
 
       if (arrowElement && middlewareData.arrow) {
         const { x: arrowX, y: arrowY } = middlewareData.arrow;
@@ -180,9 +179,8 @@ export class ConfirmPopup {
           left: arrowX != null ? `${arrowX}px` : '',
           top: arrowY != null ? `${arrowY}px` : '',
         };
-(arrowElement).style.left = arrowStyles.left;
-(arrowElement).style.top = arrowStyles.top;
-         
+        arrowElement.style.left = arrowStyles.left;
+        arrowElement.style.top = arrowStyles.top;
       }
     };
 

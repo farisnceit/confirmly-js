@@ -9,6 +9,8 @@ A lightweight, customizable JavaScript confirmation popup library with TypeScrip
 ![](https://img.shields.io/github/issues/farisnceit/confirmly-js)
 ![NPM License](https://img.shields.io/npm/l/confirmly-popup.js)
 
+![Confirmly-Popup.js Banner](banner.png)
+
 ## Live Demo
 
 Check out the live demo to see Confirmly in action with various themes, placements, and customization options:
@@ -63,7 +65,7 @@ Add the following script tags to your HTML file:
 
 ```javascript
 import { ConfirmPopup } from 'confirmly-popup.js';
-import 'confirmly-popup.js/styles.css';
+import 'confirmly-popup.js/styles/confirmly-popup.css';
 
 // Create a new confirmation popup
 const popup = new confirmly.ConfirmPopup({
@@ -81,7 +83,7 @@ const popup = new confirmly.ConfirmPopup({
 
 ```javascript
 const { ConfirmPopup } = require('confirmly-popup.js');
-require('confirmly-popup.js/styles.css');
+require('confirmly-popup.js/styles/confirmly-popup.css');
 
 // Create a new confirmation popup
 const popup = new confirmly.ConfirmPopup({
