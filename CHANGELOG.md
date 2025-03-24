@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2024-03-14
+
+### Changed
+
+- Migrated from @popperjs/core to @floating-ui/dom for improved positioning functionality
+- Updated dependency versions for better compatibility and performance
+- Enhanced positioning system with latest floating-ui features
+
+### Added
+
+- New positioning options from @floating-ui/dom integration
+- Improved TypeScript type definitions
+- Better handling of dynamic content updates
+
 ## [1.5.1] - 2025-03-12
 
 ### Added
