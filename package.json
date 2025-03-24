@@ -1,6 +1,6 @@
 {
   "name": "confirmly-popup.js",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "type": "module",
   "description": "A lightweight javascript confirmation popup with support for Bootstrap, Tailwind, and Material Design.",
   "repository": {
@@ -34,7 +34,9 @@
       "umd": "./dist/confirmly-popup.umd.min.js",
       "types": "./dist/types/confirmlyPopup.d.ts"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles": {
+      "default": "./styles/confirmly-popup.css"
+    }
   },
   "scripts": {
     "build": "rollup -c",
@@ -48,7 +50,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
-    "@popperjs/core": "^2.11.8",
+    "@floating-ui/dom": "^1.6.3",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",

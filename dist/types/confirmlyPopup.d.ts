@@ -1,7 +1,7 @@
 import { PopperOptions } from './constants';
 import '../styles/confirmly-popup.scss';
 export declare class ConfirmPopup {
-    private popperInstance;
+    private cleanup;
     private readonly template;
     private readonly buttonClasses;
     private readonly buttonContents;
