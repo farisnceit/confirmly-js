@@ -34,7 +34,9 @@
       "umd": "./dist/confirmly-popup.umd.min.js",
       "types": "./dist/types/confirmlyPopup.d.ts"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles": {
+      "default": "./styles/confirmly-popup.css"
+    }
   },
   "scripts": {
     "build": "rollup -c",
